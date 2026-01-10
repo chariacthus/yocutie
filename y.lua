@@ -1,13 +1,4 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to yocutie.com   (Alpha 0.10.9) ~  Much Love, yocutie
-
-]]--
+--this is not real
 
 local Games = {{Name="idk",Description="idk script description.",Script="print('Executing idk...')"},{Name="im gay",Description="im gay script description.",Script="print('Executing im gay...')"},{Name="turkish gunig",Description="turkish gunig script description.",Script="print('Executing turkish gunig...')"}};
 local TweenService = game:GetService("TweenService");
@@ -32,79 +23,61 @@ gui.Name = tostring(math.random(1, 100000));
 gui.IgnoreGuiInset = true;
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
 local function MakeDraggable(frame)
-	local FlatIdent_378D0 = 0;
-	local dragging;
-	local dragInput;
-	local dragStart;
-	local startPos;
-	local update;
-	while true do
-		if (FlatIdent_378D0 == 1) then
-			function update(input)
-				local FlatIdent_12703 = 0;
-				local delta;
-				while true do
-					if (FlatIdent_12703 == 0) then
-						delta = input.Position - dragStart;
-						game:GetService("TweenService"):Create(frame, TweenInfo.new(0.1), {Position=UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)}):Play();
-						break;
-					end
-				end
+	local dragging, dragInput, dragStart, startPos;
+	local function update(input)
+		local FlatIdent_378D0 = 0;
+		local delta;
+		while true do
+			if (FlatIdent_378D0 == 0) then
+				delta = input.Position - dragStart;
+				game:GetService("TweenService"):Create(frame, TweenInfo.new(0.1), {Position=UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)}):Play();
+				break;
 			end
-			frame.InputBegan:Connect(function(input)
-				if (input.UserInputType == Enum.UserInputType.MouseButton1) then
-					local FlatIdent_2BD95 = 0;
-					while true do
-						if (FlatIdent_2BD95 == 1) then
-							startPos = frame.Position;
-							input.Changed:Connect(function()
-								if (input.UserInputState == Enum.UserInputState.End) then
-									dragging = false;
-								end
-							end);
-							break;
-						end
-						if (FlatIdent_2BD95 == 0) then
-							dragging = true;
-							dragStart = input.Position;
-							FlatIdent_2BD95 = 1;
-						end
-					end
-				end
-			end);
-			FlatIdent_378D0 = 2;
-		end
-		if (FlatIdent_378D0 == 2) then
-			frame.InputChanged:Connect(function(input)
-				if (input.UserInputType == Enum.UserInputType.MouseMovement) then
-					dragInput = input;
-				end
-			end);
-			UserInputService.InputChanged:Connect(function(input)
-				if ((input == dragInput) and dragging) then
-					update(input);
-				end
-			end);
-			break;
-		end
-		if (FlatIdent_378D0 == 0) then
-			dragging, dragInput, dragStart, startPos = nil;
-			update = nil;
-			FlatIdent_378D0 = 1;
 		end
 	end
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1) then
+			local FlatIdent_2953F = 0;
+			while true do
+				if (FlatIdent_2953F == 0) then
+					dragging = true;
+					dragStart = input.Position;
+					FlatIdent_2953F = 1;
+				end
+				if (FlatIdent_2953F == 1) then
+					startPos = frame.Position;
+					input.Changed:Connect(function()
+						if (input.UserInputState == Enum.UserInputState.End) then
+							dragging = false;
+						end
+					end);
+					break;
+				end
+			end
+		end
+	end);
+	frame.InputChanged:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseMovement) then
+			dragInput = input;
+		end
+	end);
+	UserInputService.InputChanged:Connect(function(input)
+		if ((input == dragInput) and dragging) then
+			update(input);
+		end
+	end);
 end
 local function t(o, i, g)
-	local FlatIdent_60EA1 = 0;
+	local FlatIdent_47A9C = 0;
 	local x;
 	while true do
-		if (FlatIdent_60EA1 == 1) then
+		if (FlatIdent_47A9C == 1) then
 			return x;
 		end
-		if (FlatIdent_60EA1 == 0) then
+		if (FlatIdent_47A9C == 0) then
 			x = TweenService:Create(o, i, g);
 			x:Play();
-			FlatIdent_60EA1 = 1;
+			FlatIdent_47A9C = 1;
 		end
 	end
 end
@@ -126,7 +99,7 @@ uistroke.Transparency = 1;
 uistroke.Parent = main;
 local title = Instance.new("TextLabel");
 title.Size = UDim2.new(1, 0, 0, 30);
-title.Position = UDim2.new(0, 0, 0.15, 0);
+title.Position = UDim2.new(0, 0, 0.1, 0);
 title.BackgroundTransparency = 1;
 title.Text = "sync";
 title.TextColor3 = Color3.fromRGB(255, 255, 255);
@@ -323,67 +296,90 @@ local function LoadGameHub()
 	local SelectedScript = "";
 	LaunchBtn.MouseButton1Click:Connect(function()
 		if (SelectedScript ~= "") then
-			local FlatIdent_703C8 = 0;
+			local FlatIdent_A9A3 = 0;
+			local fadeInfo;
 			while true do
-				if (FlatIdent_703C8 == 3) then
-					t(HubFrame, TweenInfo.new(0.3), {Size=UDim2.new(0, 0, 0, 0),BackgroundTransparency=1});
-					wait(0.3);
-					FlatIdent_703C8 = 4;
+				if (FlatIdent_A9A3 == 0) then
+					t(LaunchBtn, TweenInfo.new(0.1), {BackgroundColor3=Color3.fromRGB(200, 200, 200)});
+					wait(0.1);
+					LaunchBtn.Text = "LAUNCHING";
+					FlatIdent_A9A3 = 1;
 				end
-				if (FlatIdent_703C8 == 2) then
+				if (FlatIdent_A9A3 == 1) then
+					t(LaunchBtn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(50, 255, 100)});
 					loadstring(SelectedScript)();
 					wait(0.5);
-					FlatIdent_703C8 = 3;
+					FlatIdent_A9A3 = 2;
 				end
-				if (FlatIdent_703C8 == 4) then
+				if (FlatIdent_A9A3 == 3) then
+					wait(0.6);
 					gui:Destroy();
 					break;
 				end
-				if (FlatIdent_703C8 == 1) then
-					LaunchBtn.Text = "LAUNCHING";
-					t(LaunchBtn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(50, 255, 100)});
-					FlatIdent_703C8 = 2;
-				end
-				if (FlatIdent_703C8 == 0) then
-					t(LaunchBtn, TweenInfo.new(0.1), {BackgroundColor3=Color3.fromRGB(200, 200, 200)});
-					wait(0.1);
-					FlatIdent_703C8 = 1;
+				if (FlatIdent_A9A3 == 2) then
+					fadeInfo = TweenInfo.new(0.5);
+					t(HubFrame, fadeInfo, {BackgroundTransparency=1});
+					for _, v in pairs(HubFrame:GetDescendants()) do
+						local FlatIdent_9147D = 0;
+						while true do
+							if (FlatIdent_9147D == 0) then
+								if v:IsA("GuiObject") then
+									t(v, fadeInfo, {BackgroundTransparency=1});
+								end
+								if (v:IsA("TextLabel") or v:IsA("TextButton")) then
+									t(v, fadeInfo, {TextTransparency=1});
+								end
+								FlatIdent_9147D = 1;
+							end
+							if (FlatIdent_9147D == 1) then
+								if v:IsA("UIStroke") then
+									t(v, fadeInfo, {Transparency=1});
+								end
+								if v:IsA("ImageLabel") then
+									t(v, fadeInfo, {ImageTransparency=1});
+								end
+								break;
+							end
+						end
+					end
+					FlatIdent_A9A3 = 3;
 				end
 			end
 		end
 	end);
 	for _, gameData in pairs(Games) do
-		local GameBtn = Instance.new("TextButton");
-		GameBtn.Size = UDim2.new(1, 0, 0, 40);
-		GameBtn.BackgroundColor3 = Color3.fromRGB(10, 10, 10);
-		GameBtn.Text = "   " .. gameData.Name;
-		GameBtn.TextColor3 = Color3.fromRGB(120, 120, 120);
-		GameBtn.Font = Enum.Font.GothamMedium;
-		GameBtn.TextSize = 13;
-		GameBtn.TextXAlignment = Enum.TextXAlignment.Left;
-		GameBtn.AutoButtonColor = false;
-		GameBtn.Parent = ScrollContainer;
-		local BtnCorner = Instance.new("UICorner");
-		BtnCorner.CornerRadius = UDim.new(0, 6);
-		BtnCorner.Parent = GameBtn;
-		GameBtn.MouseEnter:Connect(function()
-			if (GameBtn.BackgroundColor3 ~= Color3.fromRGB(25, 25, 25)) then
-				t(GameBtn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(18, 18, 18),TextColor3=Color3.fromRGB(200, 200, 200)});
+		local FlatIdent_17196 = 0;
+		local GameBtn;
+		local BtnCorner;
+		while true do
+			if (FlatIdent_17196 == 0) then
+				GameBtn = Instance.new("TextButton");
+				GameBtn.Size = UDim2.new(1, 0, 0, 40);
+				GameBtn.BackgroundColor3 = Color3.fromRGB(10, 10, 10);
+				FlatIdent_17196 = 1;
 			end
-		end);
-		GameBtn.MouseLeave:Connect(function()
-			if (GameBtn.BackgroundColor3 ~= Color3.fromRGB(25, 25, 25)) then
-				t(GameBtn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(10, 10, 10),TextColor3=Color3.fromRGB(120, 120, 120)});
+			if (FlatIdent_17196 == 4) then
+				BtnCorner.Parent = GameBtn;
+				GameBtn.MouseEnter:Connect(function()
+					if (GameBtn.BackgroundColor3 ~= Color3.fromRGB(25, 25, 25)) then
+						t(GameBtn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(18, 18, 18),TextColor3=Color3.fromRGB(200, 200, 200)});
+					end
+				end);
+				GameBtn.MouseLeave:Connect(function()
+					if (GameBtn.BackgroundColor3 ~= Color3.fromRGB(25, 25, 25)) then
+						t(GameBtn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(10, 10, 10),TextColor3=Color3.fromRGB(120, 120, 120)});
+					end
+				end);
+				FlatIdent_17196 = 5;
 			end
-		end);
-		GameBtn.MouseButton1Click:Connect(function()
-			local FlatIdent_E0D0 = 0;
-			while true do
-				if (FlatIdent_E0D0 == 5) then
-					t(LaunchBtn, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundTransparency=0,TextTransparency=0});
-					break;
-				end
-				if (FlatIdent_E0D0 == 0) then
+			if (FlatIdent_17196 == 2) then
+				GameBtn.TextSize = 13;
+				GameBtn.TextXAlignment = Enum.TextXAlignment.Left;
+				GameBtn.AutoButtonColor = false;
+				FlatIdent_17196 = 3;
+			end
+			if (FlatIdent_17196 == 5) then
+				GameBtn.MouseButton1Click:Connect(function()
 					for _, c in pairs(ScrollContainer:GetChildren()) do
 						if c:IsA("TextButton") then
 							t(c, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(10, 10, 10),TextColor3=Color3.fromRGB(120, 120, 120)});
@@ -391,110 +387,132 @@ local function LoadGameHub()
 					end
 					t(GameBtn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(25, 25, 25),TextColor3=Color3.fromRGB(255, 255, 255)});
 					WelcomeText.Visible = false;
-					FlatIdent_E0D0 = 1;
-				end
-				if (FlatIdent_E0D0 == 4) then
-					LaunchBtn.TextTransparency = 1;
-					t(GameTitle, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {TextTransparency=0});
-					t(GameDesc, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {TextTransparency=0});
-					FlatIdent_E0D0 = 5;
-				end
-				if (FlatIdent_E0D0 == 3) then
-					GameTitle.TextTransparency = 1;
-					GameDesc.TextTransparency = 1;
-					LaunchBtn.BackgroundTransparency = 1;
-					FlatIdent_E0D0 = 4;
-				end
-				if (FlatIdent_E0D0 == 2) then
-					GameTitle.Text = gameData.Name;
-					GameDesc.Text = gameData.Description;
-					SelectedScript = gameData.Script;
-					FlatIdent_E0D0 = 3;
-				end
-				if (FlatIdent_E0D0 == 1) then
 					GameTitle.Visible = true;
 					GameDesc.Visible = true;
 					LaunchBtn.Visible = true;
-					FlatIdent_E0D0 = 2;
-				end
+					GameTitle.Text = gameData.Name;
+					GameDesc.Text = gameData.Description;
+					SelectedScript = gameData.Script;
+					GameTitle.TextTransparency = 1;
+					GameDesc.TextTransparency = 1;
+					LaunchBtn.BackgroundTransparency = 1;
+					LaunchBtn.TextTransparency = 1;
+					t(GameTitle, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {TextTransparency=0});
+					t(GameDesc, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {TextTransparency=0});
+					t(LaunchBtn, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundTransparency=0,TextTransparency=0});
+				end);
+				break;
 			end
-		end);
+			if (FlatIdent_17196 == 3) then
+				GameBtn.Parent = ScrollContainer;
+				BtnCorner = Instance.new("UICorner");
+				BtnCorner.CornerRadius = UDim.new(0, 6);
+				FlatIdent_17196 = 4;
+			end
+			if (FlatIdent_17196 == 1) then
+				GameBtn.Text = "   " .. gameData.Name;
+				GameBtn.TextColor3 = Color3.fromRGB(120, 120, 120);
+				GameBtn.Font = Enum.Font.GothamMedium;
+				FlatIdent_17196 = 2;
+			end
+		end
 	end
 end
 task.spawn(function()
-	wait(0.5);
-	t(main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Size=UDim2.new(0, 320, 0, 160)});
-	t(uistroke, TweenInfo.new(0.6), {Transparency=0.8});
-	wait(0.3);
-	t(title, TweenInfo.new(0.4), {TextTransparency=0});
-	t(sub, TweenInfo.new(0.4), {TextTransparency=0});
-	t(bar_bg, TweenInfo.new(0.4), {BackgroundTransparency=0});
-	wait(0.1);
-	t(bar_fill, TweenInfo.new(1.5, Enum.EasingStyle.Quint), {Size=UDim2.new(1, 0, 1, 0)});
-	wait(1.6);
-	t(sub, TweenInfo.new(0.3), {TextTransparency=1});
-	t(bar_bg, TweenInfo.new(0.3), {BackgroundTransparency=1});
-	t(bar_fill, TweenInfo.new(0.3), {BackgroundTransparency=1});
-	wait(0.3);
-	bar_bg.Visible = false;
-	sub.Visible = false;
-	t(key_box, TweenInfo.new(0.5), {BackgroundTransparency=0,TextTransparency=0});
-	t(key_box_s, TweenInfo.new(0.5), {Transparency=0});
-	t(btn, TweenInfo.new(0.5), {BackgroundTransparency=0,TextTransparency=0});
-	t(discord_txt, TweenInfo.new(0.5), {TextTransparency=0});
-	MakeDraggable(main);
-	btn.MouseButton1Click:Connect(function()
-		if (key_box.Text == "sync_user") then
-			local FlatIdent_52551 = 0;
-			local fadeInfo;
-			while true do
-				if (FlatIdent_52551 == 1) then
-					t(main, fadeInfo, {BackgroundTransparency=1});
-					t(uistroke, fadeInfo, {Transparency=1});
-					t(title, fadeInfo, {TextTransparency=1});
-					t(key_box, fadeInfo, {TextTransparency=1,BackgroundTransparency=1});
-					FlatIdent_52551 = 2;
-				end
-				if (FlatIdent_52551 == 2) then
-					t(key_box_s, fadeInfo, {Transparency=1});
-					t(btn, fadeInfo, {TextTransparency=1,BackgroundTransparency=1});
-					t(discord_txt, fadeInfo, {TextTransparency=1});
-					wait(1);
-					FlatIdent_52551 = 3;
-				end
-				if (FlatIdent_52551 == 0) then
-					t(btn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(100, 255, 100)});
-					btn.Text = "Success";
-					wait(0.5);
-					fadeInfo = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
-					FlatIdent_52551 = 1;
-				end
-				if (FlatIdent_52551 == 3) then
-					main.Visible = false;
-					LoadGameHub();
-					break;
-				end
-			end
-		else
-			local FlatIdent_5346B = 0;
-			local old;
-			while true do
-				if (FlatIdent_5346B == 0) then
-					old = btn.BackgroundColor3;
-					t(btn, TweenInfo.new(0.1), {BackgroundColor3=Color3.fromRGB(255, 50, 50)});
-					FlatIdent_5346B = 1;
-				end
-				if (2 == FlatIdent_5346B) then
-					t(btn, TweenInfo.new(0.3), {BackgroundColor3=old});
-					btn.Text = "Login";
-					break;
-				end
-				if (1 == FlatIdent_5346B) then
-					btn.Text = "Invalid";
-					wait(0.5);
-					FlatIdent_5346B = 2;
-				end
-			end
+	local FlatIdent_494DF = 0;
+	while true do
+		if (FlatIdent_494DF == 2) then
+			t(bar_fill, TweenInfo.new(1.5, Enum.EasingStyle.Quint), {Size=UDim2.new(1, 0, 1, 0)});
+			wait(1.6);
+			t(sub, TweenInfo.new(0.3), {TextTransparency=1});
+			t(bar_bg, TweenInfo.new(0.3), {BackgroundTransparency=1});
+			FlatIdent_494DF = 3;
 		end
-	end);
+		if (FlatIdent_494DF == 1) then
+			t(title, TweenInfo.new(0.4), {TextTransparency=0});
+			t(sub, TweenInfo.new(0.4), {TextTransparency=0});
+			t(bar_bg, TweenInfo.new(0.4), {BackgroundTransparency=0});
+			wait(0.1);
+			FlatIdent_494DF = 2;
+		end
+		if (FlatIdent_494DF == 4) then
+			t(key_box, TweenInfo.new(0.5), {BackgroundTransparency=0,TextTransparency=0});
+			t(key_box_s, TweenInfo.new(0.5), {Transparency=0});
+			t(btn, TweenInfo.new(0.5), {BackgroundTransparency=0,TextTransparency=0});
+			t(discord_txt, TweenInfo.new(0.5), {TextTransparency=0});
+			FlatIdent_494DF = 5;
+		end
+		if (FlatIdent_494DF == 0) then
+			wait(0.5);
+			t(main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Size=UDim2.new(0, 320, 0, 160)});
+			t(uistroke, TweenInfo.new(0.6), {Transparency=0.8});
+			wait(0.3);
+			FlatIdent_494DF = 1;
+		end
+		if (FlatIdent_494DF == 3) then
+			t(bar_fill, TweenInfo.new(0.3), {BackgroundTransparency=1});
+			wait(0.3);
+			bar_bg.Visible = false;
+			sub.Visible = false;
+			FlatIdent_494DF = 4;
+		end
+		if (FlatIdent_494DF == 5) then
+			MakeDraggable(main);
+			btn.MouseButton1Click:Connect(function()
+				if (key_box.Text == "sync_user") then
+					local FlatIdent_40B41 = 0;
+					local fadeInfo;
+					while true do
+						if (3 == FlatIdent_40B41) then
+							main.Visible = false;
+							LoadGameHub();
+							break;
+						end
+						if (1 == FlatIdent_40B41) then
+							t(main, fadeInfo, {BackgroundTransparency=1});
+							t(uistroke, fadeInfo, {Transparency=1});
+							t(title, fadeInfo, {TextTransparency=1});
+							t(key_box, fadeInfo, {TextTransparency=1,BackgroundTransparency=1});
+							FlatIdent_40B41 = 2;
+						end
+						if (0 == FlatIdent_40B41) then
+							t(btn, TweenInfo.new(0.2), {BackgroundColor3=Color3.fromRGB(100, 255, 100)});
+							btn.Text = "Success";
+							wait(0.5);
+							fadeInfo = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out);
+							FlatIdent_40B41 = 1;
+						end
+						if (2 == FlatIdent_40B41) then
+							t(key_box_s, fadeInfo, {Transparency=1});
+							t(btn, fadeInfo, {TextTransparency=1,BackgroundTransparency=1});
+							t(discord_txt, fadeInfo, {TextTransparency=1});
+							wait(1);
+							FlatIdent_40B41 = 3;
+						end
+					end
+				else
+					local FlatIdent_8435E = 0;
+					local old;
+					while true do
+						if (FlatIdent_8435E == 2) then
+							t(btn, TweenInfo.new(0.3), {BackgroundColor3=old});
+							btn.Text = "Login";
+							break;
+						end
+						if (FlatIdent_8435E == 1) then
+							btn.Text = "Invalid";
+							wait(0.5);
+							FlatIdent_8435E = 2;
+						end
+						if (FlatIdent_8435E == 0) then
+							old = btn.BackgroundColor3;
+							t(btn, TweenInfo.new(0.1), {BackgroundColor3=Color3.fromRGB(255, 50, 50)});
+							FlatIdent_8435E = 1;
+						end
+					end
+				end
+			end);
+			break;
+		end
+	end
 end);
