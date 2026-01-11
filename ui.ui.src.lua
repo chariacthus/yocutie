@@ -3797,3 +3797,7 @@ local Library do
             return Textbox 
         end
     end
+
+getgenv().Library = Library
+
+return Library
